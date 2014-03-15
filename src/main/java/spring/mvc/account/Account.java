@@ -1,6 +1,11 @@
 package spring.mvc.account;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
+
+import spring.mvc.schedule.Schedule;
 
 @SuppressWarnings("serial")
 @Entity
@@ -11,22 +16,27 @@ public class Account implements java.io.Serializable {
 	public static final String FIND_BY_EMAIL = "Account.findByEmail";
 
 	@Id
+	@Column(name = "AccountId")
 	@GeneratedValue
 	private Long id;
 
 	@Column(unique = true)
 	private String email;
-	
+
 	@Column
 	private String password;
-	
+
 	@Column
 	private String role = "ROLE_USER";
 
-    protected Account() {
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "Account_Schedule", joinColumns = { @JoinColumn(name = "AccountId") }, inverseJoinColumns = { @JoinColumn(name = "ScheduleId") })
+	private Set<Schedule> schedule = new HashSet<Schedule>();
+
+	protected Account() {
 
 	}
-	
+
 	public Account(String email, String password, String role) {
 		this.email = email;
 		this.password = password;
@@ -37,7 +47,7 @@ public class Account implements java.io.Serializable {
 		return id;
 	}
 
-    public String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
@@ -55,6 +65,10 @@ public class Account implements java.io.Serializable {
 
 	public String getRole() {
 		return role;
+	}
+
+	public Set<Schedule> getSchedule() {
+		return schedule;
 	}
 
 	public void setRole(String role) {

@@ -65,10 +65,10 @@ class JpaConfig {
 	//
 	// return entityManagerFactoryBean;
 	// }
-	//	@Bean
-	//	public PlatformTransactionManager annotationDrivenTransactionManager() {
-	//		return new JpaTransactionManager();
-	//	}
+	// @Bean
+	// public PlatformTransactionManager annotationDrivenTransactionManager() {
+	// return new JpaTransactionManager();
+	// }
 	@Bean
 	public FactoryBean<SessionFactory> createSessionFactory() throws Exception {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -79,8 +79,7 @@ class JpaConfig {
 
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource);
-		sessionFactory
-				.setPackagesToScan(new String[] {"spring.mvc.account" });
+		sessionFactory.setPackagesToScan(new String[] {"spring.mvc.account", "spring.mvc.schedule"});
 		sessionFactory
 				.setHibernateProperties(hibernateProperties().getObject());
 
@@ -97,6 +96,7 @@ class JpaConfig {
 		pfb.setProperties(properties);
 		return pfb;
 	}
+
 	@Bean
 	public HibernateTransactionManager transactionManager() throws Exception {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
