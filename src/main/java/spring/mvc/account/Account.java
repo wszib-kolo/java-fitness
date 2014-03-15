@@ -2,11 +2,9 @@ package spring.mvc.account;
 
 import javax.persistence.*;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "account")
+@Table(name = "Account")
 @NamedQuery(name = Account.FIND_BY_EMAIL, query = "select a from Account a where a.email = :email")
 public class Account implements java.io.Serializable {
 
@@ -18,16 +16,17 @@ public class Account implements java.io.Serializable {
 
 	@Column(unique = true)
 	private String email;
-
-	@JsonIgnore
+	
+	@Column
 	private String password;
-
+	
+	@Column
 	private String role = "ROLE_USER";
 
-	protected Account() {
+    protected Account() {
 
 	}
-
+	
 	public Account(String email, String password, String role) {
 		this.email = email;
 		this.password = password;
@@ -38,7 +37,7 @@ public class Account implements java.io.Serializable {
 		return id;
 	}
 
-	public String getEmail() {
+    public String getEmail() {
 		return email;
 	}
 
