@@ -19,16 +19,19 @@
     <p>
         Witaj <font th:text="${name}"></font> w aplikacji Fitness!
     </p>
-        <table>
+    
+    <table class="schedule-narrow">
       <tr>
-        <th>Nazwa zajęć</th>
-        <th>Data</th>
+        <th class="schedule-top">Nazwa zajęć</th>
+        <th class="schedule-top" >Data</th>
       </tr>
+      
       <tr th:each="schedule: ${schedule}">
         <td th:text="${schedule.className}"></td>
-        <td th:text="${schedule.classDate}"></td>
+        <td th:text="${schedule.classDate}" class="schedule-left"></td>
       </tr>
     </table>
+    
 </div>
 </body>
 </html>

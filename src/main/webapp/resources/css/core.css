@@ -17,3 +17,26 @@ body {
        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
             box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
+.schedule-top {
+	background-color: #228B22;
+	color: #fff;
+	text-align: center;
+		-moz-border-radius: 5px;
+			border-radius: 5px;
+}
+.schedule-left{
+		border-left-style: ridge;
+}
+.schedule-narrow {
+    max-width: 600px;
+    min-width: 450px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #eee;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	box-shadow: 5px 5px 5px black;
+}
+}
