@@ -19,6 +19,16 @@
     <p>
         Witaj <font th:text="${name}"></font> w aplikacji Fitness!
     </p>
+        <table>
+      <tr>
+        <th>Nazwa zajęć</th>
+        <th>Data</th>
+      </tr>
+      <tr th:each="schedule: ${schedule}">
+        <td th:text="${schedule.className}"></td>
+        <td th:text="${schedule.classDate}"></td>
+      </tr>
+    </table>
 </div>
 </body>
 </html>

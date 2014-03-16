@@ -29,7 +29,7 @@ public class Account implements java.io.Serializable {
 	@Column
 	private String role = "ROLE_USER";
 
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "Account_Schedule", joinColumns = { @JoinColumn(name = "AccountId") }, inverseJoinColumns = { @JoinColumn(name = "ScheduleId") })
 	private Set<Schedule> schedule = new HashSet<Schedule>();
 
