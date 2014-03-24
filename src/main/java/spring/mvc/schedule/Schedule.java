@@ -1,10 +1,18 @@
 package spring.mvc.schedule;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import spring.mvc.account.Account;
 
@@ -19,7 +27,7 @@ public class Schedule implements java.io.Serializable {
 	private Long id;
 
 	@ManyToMany(mappedBy = "schedules")
-	private Set<Account> accounts = new HashSet<Account>();
+	private List<Account> accounts = new ArrayList<Account>();
 
 	@Column
 	private String className;
@@ -51,7 +59,7 @@ public class Schedule implements java.io.Serializable {
 		return id;
 	}
 
-	public Set<Account> getAccounts() {
+	public List<Account> getAccounts() {
 		return accounts;
 	}
 	

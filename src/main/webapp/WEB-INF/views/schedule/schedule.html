@@ -25,12 +25,20 @@
         <th>Nazwa zajęć</th>
         <th>Data</th>
         <th>Prowadzący</th>
+        <th></th>
       </tr>
       
       <tr th:each="schedule: ${schedule}">
         <td th:text="${schedule.className}"></td>
         <td th:text="${schedule.classDate}"></td>
         <td th:text="${schedule.trainer.email}"></td>
+        <td >
+        <form action="schedule" th:action="@{/schedule}" th:object="${scheduleSignForm}" method="post">
+	        <input type="hidden" id="userName" name="userName"  th:object="${scheduleSignForm.userName}" th:value="${name}" />
+	        <input type="hidden" id="scheduleId" name="scheduleId" th:object="${scheduleSignForm.scheduleId}" th:value="${schedule.id}" />
+	        <input class="btn btn-success" type="submit" value="zapisz się" />
+  		</form>
+  		</td>
       </tr>
     </table>
     

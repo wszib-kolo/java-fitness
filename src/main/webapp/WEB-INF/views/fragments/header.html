@@ -17,6 +17,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#" th:href="@{/}">Home</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}" class="active"><a href="/schedule" th:href="@{/schedule}">Zapisz</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/signin" th:href="@{/signin}">Zaloguj</a></li>
