@@ -28,6 +28,8 @@ public class UserService implements UserDetailsService {
 		acc1.getSchedule().add(sch1);
 		acc1.getSchedule().add(sch2);
 		acc2.getSchedule().add(sch2);
+		sch1.setTrainer(acc1);
+		sch2.setTrainer(acc2);
 		accountRepository.save(acc1);
 		accountRepository.save(acc2);
 	}

@@ -18,7 +18,7 @@ public class Schedule implements java.io.Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToMany(mappedBy = "schedule")
+	@ManyToMany(mappedBy = "schedules")
 	private Set<Account> accounts = new HashSet<Account>();
 
 	@Column
@@ -26,10 +26,22 @@ public class Schedule implements java.io.Serializable {
 
 	@Column
 	private Date classDate;
-
+	
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="AccountId")
+	public Account trainer;
+	
 	protected Schedule() {
 	}
 
+	public Account getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(Account trainer) {
+		this.trainer = trainer;
+	}
+	
 	public Schedule(String ClassName, Date date) {
 		this.className = ClassName;
 		this.classDate = date;
@@ -42,7 +54,7 @@ public class Schedule implements java.io.Serializable {
 	public Set<Account> getAccounts() {
 		return accounts;
 	}
-
+	
 	public String getClassName() {
 		return className;
 	}

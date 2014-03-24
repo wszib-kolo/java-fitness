@@ -31,8 +31,12 @@ public class Account implements java.io.Serializable {
 
 	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "Account_Schedule", joinColumns = { @JoinColumn(name = "AccountId") }, inverseJoinColumns = { @JoinColumn(name = "ScheduleId") })
-	private Set<Schedule> schedule = new HashSet<Schedule>();
+	private Set<Schedule> schedules = new HashSet<Schedule>();
 
+	
+	@OneToMany(mappedBy="trainer", cascade={CascadeType.ALL})
+    private Set<Schedule> trainerSchedules;
+	
 	protected Account() {
 
 	}
@@ -68,7 +72,7 @@ public class Account implements java.io.Serializable {
 	}
 
 	public Set<Schedule> getSchedule() {
-		return schedule;
+		return schedules;
 	}
 
 	public void setRole(String role) {

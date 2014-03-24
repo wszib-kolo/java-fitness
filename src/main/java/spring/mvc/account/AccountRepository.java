@@ -28,7 +28,7 @@ public class AccountRepository {
 	@Transactional
 	public Account save(Account account) {
 		account.setPassword(passwordEncoder.encode(account.getPassword()));
-		sessionFactory.getCurrentSession().save(account);
+		sessionFactory.getCurrentSession().saveOrUpdate(account);
 		return account;
 	}
 

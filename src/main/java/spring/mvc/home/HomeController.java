@@ -2,14 +2,14 @@ package spring.mvc.home;
 
 import java.security.Principal;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import spring.mvc.account.AccountRepository;
 import spring.mvc.signup.SignupForm;
-import spring.mvc.account.*;
 @Controller
 public class HomeController {
 	@Autowired

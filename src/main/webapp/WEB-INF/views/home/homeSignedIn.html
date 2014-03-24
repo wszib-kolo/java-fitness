@@ -24,11 +24,13 @@
       <tr>
         <th class="schedule-top">Nazwa zajęć</th>
         <th class="schedule-top" >Data</th>
+        <th class="schedule-top" >Prowadzący</th>
       </tr>
       
       <tr th:each="schedule: ${schedule}">
         <td th:text="${schedule.className}"></td>
         <td th:text="${schedule.classDate}" class="schedule-left"></td>
+        <td th:text="${schedule.trainer.email}" class="schedule-left"></td>
       </tr>
     </table>
     
