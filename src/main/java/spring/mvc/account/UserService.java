@@ -32,19 +32,17 @@ public class UserService implements UserDetailsService {
 		Account acc2 = new Account("admin", "admin", "ROLE_ADMIN");
 		Schedule sch1 = new Schedule("pierwsze zajecia", new Date(114,03,21,10,00));
 		Schedule sch2 = new Schedule("drugie zajecia", new Date(114,03,23,11,00));
-		Schedule sch3 = new Schedule("trzecie zajecia", new Date(114,03,26,12,00));
-		acc1.getSchedule().add(sch1);
-		acc1.getSchedule().add(sch2);
-		acc2.getSchedule().add(sch2);
+		Schedule sch3 = new Schedule("trzecie zajecia", new Date(114,03,26,12,00));	
 		accountRepository.save(acc1);
-		accountRepository.save(acc2);
-		
+		accountRepository.save(acc2);		
 		sch1.setTrainer(acc1);
 		sch2.setTrainer(acc2);
 		sch3.setTrainer(acc2);
 		scheduleRepository.save(sch1);
 		scheduleRepository.save(sch2);
 		scheduleRepository.save(sch3);
+		accountRepository.addScheduleToSet(acc1, sch1);
+		accountRepository.addScheduleToSet(acc2, sch2);	
 	}
 
 	@Override

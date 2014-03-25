@@ -37,17 +37,20 @@ public class ScheduleController {
 	
 	@RequestMapping(value = "schedule", method = RequestMethod.POST)
 	public String saveToClass(Principal principal, Model model, @ModelAttribute("scheduleSignForm") ScheduleSignForm signinForm) {
-
 		if(principal != null){
 			Schedule sch = scheduleRepository.findById(signinForm.getScheduleId());
 			Account acc = accountRepository.findByEmail(principal.getName());
-			acc.getSchedule().add(sch);
-			accountRepository.save(acc);
+			if (accountRepository.addScheduleToSet(acc,sch) != null){
+				model.addAttribute("message","Poprawnie zapisano Cię na zajęcia: " + sch.getClassName()+". Zapraszamy: " + sch.getClassDate());
+			}
+			else {
+				model.addAttribute("message","Niestety lista jest już pełna, nie można się zapisać na zajecia");
+			}
 			model.addAttribute("name",principal.getName());
 			model.addAttribute("scheduleSignForm", new ScheduleSignForm());
 			model.addAttribute("schedule", scheduleRepository.notSignedUpSchedule(principal.getName()));
 			return "schedule/schedule";
 		}
-		return "schedule/scheduleSign";
+		return "/";
 	}
 }

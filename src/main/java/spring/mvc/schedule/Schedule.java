@@ -21,6 +21,8 @@ import spring.mvc.account.Account;
 @Table(name = "Schedule")
 public class Schedule implements java.io.Serializable {
 
+	private static final int MAX_USER_PER_CLASS = 30;
+
 	@Id
 	@Column(name = "ScheduleId")
 	@GeneratedValue
@@ -34,6 +36,21 @@ public class Schedule implements java.io.Serializable {
 
 	@Column
 	private Date classDate;
+	
+	public int getSignedUpUsersNumber() {
+		return signedUpUsersNumber;
+	}
+
+	public boolean incSignedUpUsersNumber() {
+		if((signedUpUsersNumber+1)<=MAX_USER_PER_CLASS){
+			signedUpUsersNumber++;
+			return true;
+		}
+		return false;
+	}
+
+	@Column
+	private int signedUpUsersNumber;
 	
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="AccountId")
