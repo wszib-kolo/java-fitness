@@ -71,7 +71,11 @@ public class Account implements java.io.Serializable {
 		return role;
 	}
 
-	public Set<Schedule> getSchedule() {
+	public void setSchedules(Set<Schedule> schedules) {
+		this.schedules = schedules;
+	}
+	
+	public Set<Schedule> getSchedules() {
 		return schedules;
 	}
 

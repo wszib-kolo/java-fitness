@@ -1,10 +1,18 @@
 package spring.mvc.schedule;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import spring.mvc.account.Account;
 
@@ -13,19 +21,36 @@ import spring.mvc.account.Account;
 @Table(name = "Schedule")
 public class Schedule implements java.io.Serializable {
 
+	private static final int MAX_USER_PER_CLASS = 30;
+
 	@Id
 	@Column(name = "ScheduleId")
 	@GeneratedValue
 	private Long id;
 
 	@ManyToMany(mappedBy = "schedules")
-	private Set<Account> accounts = new HashSet<Account>();
+	private List<Account> accounts = new ArrayList<Account>();
 
 	@Column
 	private String className;
 
 	@Column
 	private Date classDate;
+	
+	public int getSignedUpUsersNumber() {
+		return signedUpUsersNumber;
+	}
+
+	public boolean incSignedUpUsersNumber() {
+		if((signedUpUsersNumber+1)<=MAX_USER_PER_CLASS){
+			signedUpUsersNumber++;
+			return true;
+		}
+		return false;
+	}
+
+	@Column
+	private int signedUpUsersNumber;
 	
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="AccountId")
@@ -51,7 +76,7 @@ public class Schedule implements java.io.Serializable {
 		return id;
 	}
 
-	public Set<Account> getAccounts() {
+	public List<Account> getAccounts() {
 		return accounts;
 	}
 	
